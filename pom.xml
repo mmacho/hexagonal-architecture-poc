@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.hexagonal</groupId>
+	<artifactId>hexagonal-architecture-poc</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+	<name>Mule hexagonal-architecture-poc</name>
+    <description>hexagonal-architecture-poc</description>
+    
+	<organization>
+        <name>mmacho Team</name>
+        <url>https://github.com/machom</url>
+    </organization>
+    
+    <properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<java.version>1.8</java.version>
+  		<maven.version>3.1.1</maven.version>
+       	<jdk.version>1.8</jdk.version>        		
+		<mule.version>3.8.0</mule.version>
+    	<mule.tools.version>1.7</mule.tools.version>
+    	<maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>
+    	    	
+    	<spring-boot.version>1.2.4.RELEASE</spring-boot.version>
+    	
+    	<junit.version>4.12</junit.version>    	
+	</properties>
+
+	<modules>
+        <module>hexagonal-architecture-domain</module>
+		<module>hexagonal-architecture-infra-application</module>           
+    </modules>
+    
+   <dependencyManagement>
+        <dependencies>
+   			<!-- Spring Boot Dependencies -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>           
+			<!-- Mule Dependencies -->
+			<!-- Xml configuration -->
+			<dependency>
+				<groupId>org.mule.modules</groupId>
+				<artifactId>mule-module-spring-config</artifactId>
+				<version>${mule.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			<!-- Mule Transports -->
+			<dependency>
+				<groupId>org.mule.transports</groupId>
+				<artifactId>mule-transport-file</artifactId>
+				<version>${mule.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.mule.transports</groupId>
+				<artifactId>mule-transport-http</artifactId>
+				<version>${mule.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.mule.transports</groupId>
+				<artifactId>mule-transport-jdbc</artifactId>
+				<version>${mule.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.mule.transports</groupId>
+				<artifactId>mule-transport-jms</artifactId>
+				<version>${mule.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.mule.transports</groupId>
+				<artifactId>mule-transport-vm</artifactId>
+				<version>${mule.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			<!-- Mule Modules -->
+			<dependency>
+				<groupId>org.mule.modules</groupId>
+				<artifactId>mule-module-scripting</artifactId>
+				<version>${mule.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.mule.modules</groupId>
+				<artifactId>mule-module-xml</artifactId>
+				<version>${mule.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			<!-- for testing -->
+			<dependency>
+				<groupId>org.mule.tests</groupId>
+				<artifactId>mule-tests-functional</artifactId>
+				<version>${mule.version}</version>
+				<scope>test</scope>
+			</dependency>     
+ 			<dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>			       
+        </dependencies>       
+    </dependencyManagement>
+    
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                    <configuration>
+                        <source>${jdk.version}</source>
+                        <target>${jdk.version}</target>
+                    </configuration>
+                </plugin>			
+				<plugin>
+					<groupId>org.mule.tools.maven</groupId>
+					<artifactId>mule-app-maven-plugin</artifactId>
+					<version>${mule.tools.version}</version>
+					<extensions>true</extensions>
+					<configuration>
+						<copyToAppsDirectory>true</copyToAppsDirectory>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+ 			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>		
+		</plugins>
+	</build>
+
+	<repositories>
+          <repository>
+            <id>Central</id>
+            <name>Central</name>
+            <url>http://repo1.maven.org/maven2/</url>
+            <layout>default</layout>
+        </repository>
+        <repository>
+            <id>mulesoft-releases</id>
+            <name>MuleSoft Releases Repository</name>
+            <url>http://repository.mulesoft.org/releases/</url>
+            <layout>default</layout>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>mulesoft-release</id>
+            <name>mulesoft release repository</name>
+            <layout>default</layout>
+            <url>http://repository.mulesoft.org/releases/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
+</project>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+   <flow name="WS-CXF-Unsecure-CodeFirst-HTTP-Listener">
+      <http:listener config-ref="Listener-Application"
+         doc:name="HTTP Inbound Endpoint" path="${endpoint.cxf.unsecure.codeFirst.path}" />
+      <flow-ref name="WS-CXF-Unsecure-CodeFirst-Endpoint" doc:name="Send to endpoint" />
+   </flow>
+   <sub-flow name="WS-CXF-Unsecure-CodeFirst-Endpoint">
+      <logger message="Begins the unsecure Code-First endpoint flow"
+         level="INFO" doc:name="Logger" />
+      <cxf:jaxws-service validationEnabled="${endpoint.validation}"
+         doc:name="Code-First endpoint interface"
+         serviceClass="${endpoint.cxf.codeFirst.interface}" namespace="${wsdl.namespace}" configuration-ref="CXF_Configuration">
+         <cxf:inInterceptors>
+            <spring:ref bean="loggingInInterceptor" />
+         </cxf:inInterceptors>
+         <cxf:inFaultInterceptors>
+            <spring:ref bean="loggingInInterceptor" />
+         </cxf:inFaultInterceptors>
+         <cxf:outInterceptors>
+            <spring:ref bean="loggingOutInterceptor" />
+         </cxf:outInterceptors>
+         <cxf:outFaultInterceptors>
+            <spring:ref bean="loggingOutInterceptor" />
+         </cxf:outFaultInterceptors>
+      </cxf:jaxws-service>
+      <component doc:name="Code-First endpoint implementation">
+         <spring-object bean="codeFirstExampleEntityEndpoint" />
+      </component>
+      <logger message="Ends the unsecure Code-First endpoint flow"
+         level="INFO" doc:name="Logger" />
+   </sub-flow>
+
+</mule>
