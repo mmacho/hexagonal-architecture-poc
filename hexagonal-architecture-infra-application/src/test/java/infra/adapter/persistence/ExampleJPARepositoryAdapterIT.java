@@ -20,6 +20,11 @@ import com.hexagonal.infra.DatabaseConfiguration;
 import com.hexagonal.infra.RepositoryConfiguration.DataJPAConfiguration;
 import com.hexagonal.infra.adapter.persistence.ExampleJPARepositoryAdapter;
 
+/**
+ * no va porque no coge las propertes
+ * @author Conchi
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @TestPropertySource("classpath:config/persistence.properties")
 @ContextConfiguration(classes = {DatabaseConfiguration.class, DataJPAConfiguration.class})
