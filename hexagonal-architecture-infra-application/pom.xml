@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<parent>
 		<groupId>com.hexagonal</groupId>
 		<artifactId>hexagonal-architecture-poc</artifactId>
-	    <version>1.0.0-SNAPSHOT</version>
-    </parent>	
-	
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<artifactId>hexagonal-architecture-infra-application</artifactId>
-    <packaging>mule</packaging>
+	<packaging>mule</packaging>
 	<name>Mule hexagonal-architecture-infra-application</name>
-    <description>Application</description>
+	<description>Application</description>
 
 	<properties>
 		<build-helper-maven-plugin.version>1.7</build-helper-maven-plugin.version>
 
 		<!-- Dependencies versions -->
-
 		<commons.dbcp.version>1.4</commons.dbcp.version>
-
 
 		<ehcache.version>2.7.0</ehcache.version>
 		<ehcache.core.version>2.5.1</ehcache.core.version>
@@ -33,8 +33,9 @@
 		<cxf.api.version>2.7.18</cxf.api.version>
 
 		<testng.version>6.9.10</testng.version>
-	</properties> 
-       
+
+	</properties>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -71,21 +72,21 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>			
+			</plugin>
 		</plugins>
 	</build>
 
 	<dependencies>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>hexagonal-architecture-domain</artifactId>
-            <version>${project.version}</version>
-        </dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>hexagonal-architecture-domain</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>com.hexagonal</groupId>
 			<artifactId>adapter-persistence-spring-data-jpa</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
-		</dependency>        
+		</dependency>
 		<!-- Xml configuration -->
 		<dependency>
 			<groupId>org.mule.modules</groupId>
@@ -123,7 +124,7 @@
 			<artifactId>mule-transport-vm</artifactId>
 			<version>${mule.version}</version>
 			<scope>provided</scope>
-		</dependency>	
+		</dependency>
 		<!-- Mule Modules -->
 		<dependency>
 			<groupId>org.mule.modules</groupId>
@@ -138,80 +139,100 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-            <groupId>org.mule.modules</groupId>
-            <artifactId>mule-module-http</artifactId>
-            <version>${mule.version}</version>
-            <scope>provided</scope>
-        </dependency>
-    	<dependency>
-            <groupId>org.mule.modules</groupId>
-            <artifactId>mule-module-cxf</artifactId>
-            <version>${mule.version}</version>
-            <scope>provided</scope>
-        </dependency>			
+			<groupId>org.mule.modules</groupId>
+			<artifactId>mule-module-http</artifactId>
+			<version>${mule.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mule.modules</groupId>
+			<artifactId>mule-module-cxf</artifactId>
+			<version>${mule.version}</version>
+			<scope>provided</scope>
+		</dependency>
 		<!-- for testing -->
 		<dependency>
 			<groupId>org.mule.tests</groupId>
 			<artifactId>mule-tests-functional</artifactId>
 			<version>${mule.version}</version>
 			<scope>test</scope>
-		</dependency>        
- 		<dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-        </dependency>   
- 		<dependency>
-         <!-- Hibernate Ehcache -->
-         <groupId>org.hibernate</groupId>
-         <artifactId>hibernate-ehcache</artifactId>
-         <version>${hibernate.version}</version>
-      </dependency>     
-      <!-- ============================================== -->
-      <!-- ================ PERSISTENCE ================= -->
-      <!-- ============================================== -->
-      <dependency>
-         <!-- Apache Commons DBCP2 -->
-         <groupId>commons-dbcp</groupId>
-         <artifactId>commons-dbcp</artifactId>
-         <version>${commons.dbcp.version}</version>
-      </dependency>
-      <dependency>
-         <!-- ehcache -->
-         <groupId>net.sf.ehcache</groupId>
-         <artifactId>ehcache</artifactId>
-         <version>${ehcache.version}</version>
-      </dependency>
-      <dependency>
-         <!-- ehcache core -->
-         <groupId>net.sf.ehcache</groupId>
-         <artifactId>ehcache-core</artifactId>
-         <version>${ehcache.core.version}</version>
-      </dependency>
-      <dependency>
-         <!-- H2 -->
-         <groupId>com.h2database</groupId>
-         <artifactId>h2</artifactId>
-         <version>${h2.version}</version>
-      </dependency>
-      <dependency>
-         <!-- Hikari CP -->
-         <groupId>com.zaxxer</groupId>
-         <artifactId>HikariCP-java6</artifactId>
-         <version>${hikari.version}</version>
-      </dependency>  	
-      
-      <!-- ============================================== -->
-      <!-- ==================== XML ===================== -->
-      <!-- ============================================== -->
+		</dependency>
+		<dependency>
+			<!-- Hibernate Ehcache -->
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-ehcache</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+		<!-- ============================================== -->
+		<!-- ================ PERSISTENCE ================= -->
+		<!-- ============================================== -->
+		<dependency>
+			<!-- Apache Commons DBCP2 -->
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>${commons.dbcp.version}</version>
+		</dependency>
+		<dependency>
+			<!-- ehcache -->
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+			<version>${ehcache.version}</version>
+		</dependency>
+		<dependency>
+			<!-- ehcache core -->
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache-core</artifactId>
+			<version>${ehcache.core.version}</version>
+		</dependency>
+		<dependency>
+			<!-- H2 -->
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>${h2.version}</version>
+		</dependency>
+		<dependency>
+			<!-- Hikari CP -->
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP-java6</artifactId>
+			<version>${hikari.version}</version>
+		</dependency>
 
-      <!-- ============================================== -->
-      <!-- ==================== CXF ===================== -->
-      <!-- ============================================== -->
-      <dependency>
-         <!-- CXF API -->
-         <groupId>org.apache.cxf</groupId>
-         <artifactId>cxf-api</artifactId>
-         <version>${cxf.api.version}</version>
-      </dependency>                                      
-    </dependencies>
+		<!-- ============================================== -->
+		<!-- ==================== XML ===================== -->
+		<!-- ============================================== -->
+
+		<!-- ============================================== -->
+		<!-- ==================== CXF ===================== -->
+		<!-- ============================================== -->
+		<dependency>
+			<!-- CXF API -->
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-api</artifactId>
+			<version>${cxf.api.version}</version>
+		</dependency>
+
+
+		<!-- Testing -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- Junit4 and Junit5 -->
+		<dependency>
+			<groupId>org.junit.vintage</groupId>
+			<artifactId>junit-vintage-engine</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 </project>

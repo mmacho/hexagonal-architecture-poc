@@ -36,7 +36,7 @@ public final class CodeFirstExampleEntityEndpoint implements ExampleEntityEndpoi
 	@Override
 	public XmlExampleEntity getEntity(final Integer id) {
 		final XmlExampleEntity response; // XML response with the entity data
-		final Example example;
+		Example example = null;
 
 		checkNotNull(id, "Received a null pointer as id");
 
@@ -46,10 +46,7 @@ public final class CodeFirstExampleEntityEndpoint implements ExampleEntityEndpoi
 		Optional<Example> op = getExampleService().findById(id);
 		if (op.isPresent()) {
 			example = op.get();
-			LOGGER.debug(String.format("Found domain with id %1$d and name %2$s", example.getEntityId(),
-					example.getEntityName()));
-		} else {
-			example = new Example();
+			LOGGER.debug(String.format("Found domain with id %1$d", example.getId()));
 		}
 
 		response = new XmlExampleEntity();

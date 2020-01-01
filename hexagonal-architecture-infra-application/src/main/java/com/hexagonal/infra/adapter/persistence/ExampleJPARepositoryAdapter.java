@@ -10,7 +10,7 @@ import com.hexagonal.persistence.jpa.entity.JpaExampleEntity;
 import com.hexagonal.persistence.jpa.repository.ExampleEntityRepository;
 
 @Transactional(readOnly = true)
-public class ExampleJPARepositoryAdapter implements ExamplePortRepository {
+public final class ExampleJPARepositoryAdapter implements ExamplePortRepository {
 
 	private final ExampleEntityRepository exampleEntityRepository;
 
@@ -21,11 +21,11 @@ public class ExampleJPARepositoryAdapter implements ExamplePortRepository {
 
 	@Override
 	public Optional<Example> findById(final Integer identifier) {
-		return exampleEntityRepository.findByEntityId(identifier).map(this::adapt);
+		return exampleEntityRepository.findById(identifier).map(this::adapt);
 	}
 
 	private Example adapt(JpaExampleEntity jpaExampleEntity) {
-		return new Example(jpaExampleEntity.getId(), jpaExampleEntity.getName());
+		return new Example(jpaExampleEntity.getId());
 	}
 
 }

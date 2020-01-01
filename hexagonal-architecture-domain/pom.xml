@@ -5,15 +5,20 @@
 	<parent>
 		<groupId>com.hexagonal</groupId>
 		<artifactId>hexagonal-architecture-poc</artifactId>
-	    <version>1.0.0-SNAPSHOT</version>
-    </parent>	
-	
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<artifactId>hexagonal-architecture-domain</artifactId>
-    <packaging>jar</packaging>
+	<packaging>jar</packaging>
 	<name>Mule hexagonal-architecture-domain</name>
-    <description>Mule hexagonal-architecture-domain</description>
+	<description>Mule hexagonal-architecture-domain</description>
+
+	<properties>
+		<maven-source-plugin.version>3.0.1</maven-source-plugin.version>
+	</properties>
 
 	<build>
 		<plugins>
@@ -25,14 +30,38 @@
 				<groupId>org.mule.tools.maven</groupId>
 				<artifactId>mule-app-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>${maven-source-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 
 	<dependencies>
- 		<dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-        </dependency>                          
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- Junit4 and Junit5 -->
+		<dependency>
+			<groupId>org.junit.vintage</groupId>
+			<artifactId>junit-vintage-engine</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
-			
 </project>
