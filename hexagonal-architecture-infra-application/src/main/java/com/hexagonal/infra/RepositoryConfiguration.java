@@ -1,5 +1,7 @@
 package com.hexagonal.infra;
 
+
+
 import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,8 +22,10 @@ public class RepositoryConfiguration {
 	@EntityScan(basePackageClasses = { JpaExampleEntity.class })
 	public static class DataJPAConfiguration {
 
+		
 		@Bean
 		public ExamplePortRepository examplePortRepository(final ExampleEntityRepository exampleEntityRepository) {
+
 			return new ExampleJPARepositoryAdapter(exampleEntityRepository);
 		}
 	}

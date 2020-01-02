@@ -16,10 +16,11 @@
 	</organization>
 
 	<scm>
-        <connection>scm:git:git://github.com/mulesoft/mule-extensions-parent.git</connection>
-        <developerConnection>scm:git:git@github.com:mulesoft/mule-extensions-parent.git</developerConnection>
-        <url>https://github.com/mulesoft/mule-extensions-parent</url>
+        <connection>git@github.com:machom/hexagonal-architecture-poc.git</connection>
+        <developerConnection>git@github.com:machom/hexagonal-architecture-poc.git</developerConnection>
+        <url>https://github.com/machom/hexagonal-architecture-poc.git</url>
     </scm>
+    
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>

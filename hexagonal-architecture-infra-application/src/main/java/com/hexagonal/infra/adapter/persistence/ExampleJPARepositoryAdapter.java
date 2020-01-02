@@ -8,6 +8,7 @@ import com.hexagonal.domain.example.Example;
 import com.hexagonal.domain.example.ExamplePortRepository;
 import com.hexagonal.persistence.jpa.entity.JpaExampleEntity;
 import com.hexagonal.persistence.jpa.repository.ExampleEntityRepository;
+
 @Transactional(readOnly = true)
 public final class ExampleJPARepositoryAdapter implements ExamplePortRepository {
 

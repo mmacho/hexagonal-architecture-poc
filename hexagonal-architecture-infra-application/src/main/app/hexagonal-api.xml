@@ -37,5 +37,4 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
       <logger message="Ends the unsecure Code-First endpoint flow"
          level="INFO" doc:name="Logger" />
    </sub-flow>
-
 </mule>
