@@ -18,7 +18,7 @@
 
 	<properties>
 		<build-helper-maven-plugin.version>1.7</build-helper-maven-plugin.version>
-
+		
 		<!-- Dependencies versions -->
 		<commons.dbcp.version>1.4</commons.dbcp.version>
 
@@ -66,13 +66,16 @@
 									<directory>src/main/api/</directory>
 								</resource>
 								<resource>
+									<directory>src/main/wsdl/</directory>
+								</resource>								
+								<resource>
 									<directory>mappings/</directory>
 								</resource>
 							</resources>
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin>		
 		</plugins>
 	</build>
 
@@ -212,21 +215,10 @@
 		</dependency>
 
 
-		<!-- Testing -->
+		<!-- Spring Testing -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<!-- Junit4 and Junit5 -->
-		<dependency>
-			<groupId>org.junit.vintage</groupId>
-			<artifactId>junit-vintage-engine</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -235,4 +227,7 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	
+
+	
 </project>

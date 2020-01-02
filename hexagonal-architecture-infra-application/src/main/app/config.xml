@@ -9,16 +9,13 @@ http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
     <description>Mule Hexagonal Microservice Architecture Configuration</description>
     <spring:beans>
-		<spring:bean id="property-placeholderInstance"
-			class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-			name="Bean">
+		<spring:bean id="property-placeholderInstance" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" name="Bean">
 			<spring:property name="locations">
 				<spring:list>
-					<spring:value>classpath:config/application.properties
-					</spring:value>
+				
+					<spring:value>classpath:config/application.properties</spring:value>
+					<spring:value>classpath:config/persistence.properties</spring:value>					
 					<spring:value>classpath:config/endpoints.properties</spring:value>
-					<spring:value>classpath:config/persistence.properties
-					</spring:value>
 					<spring:value>classpath:config/wsdl.properties</spring:value>
 					<spring:value>classpath:config/logging.properties</spring:value>
 				</spring:list>
@@ -41,5 +38,6 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 	<cxf:configuration name="CXF_Configuration"
 		enableMuleSoapHeaders="${cxf.enableMuleSoapHeaders}"
 		initializeStaticBusInstance="${cxf.initializeStaticBusInstance}"
-		doc:name="CXF Configuration" configurationLocation="${cxf.configFile}" />    
+		doc:name="CXF Configuration" configurationLocation="${cxf.configFile}" />
+  
 </mule>

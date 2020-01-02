@@ -21,8 +21,8 @@ import com.zaxxer.hikari.HikariDataSource;
 public class DatabaseConfiguration {
 
 	@Bean
-	public HikariDataSource dataSource(@Value("${jdbc.url}") String jdbcUrl, @Value("${jdbc.username}") String username,
-			@Value("${jdbc.password}") String password) {
+	public HikariDataSource dataSource(@Value("${jdbc.url}") final String jdbcUrl, @Value("${jdbc.username}") final String username,
+			@Value("${jdbc.password}") final String password) {
 		HikariDataSource hikariDataSource = new HikariDataSource();
 		hikariDataSource.setDriverClassName("org.h2.Driver");
 		hikariDataSource.setJdbcUrl(jdbcUrl);

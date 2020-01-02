@@ -1,4 +1,4 @@
-package infra.adapter.persistence;
+package infra.adapter.persistence.test;
 
 import static java.util.Optional.empty;
 import static org.hamcrest.CoreMatchers.is;

@@ -1,13 +1,17 @@
-package com.hexagonal.app;
+package config;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
-import com.hexagonal.infra.HexagonalConfiguration;
-
-@Import(HexagonalConfiguration.class)
-public class HexagonalApplication {
+/**
+ * Sin este bean no coge las properties
+ * 
+ * @author Conchi
+ *
+ */
+@Configuration
+public class PropertiesConfig {
 
 	@Bean
 	public static PropertySourcesPlaceholderConfigurer propertyConfigurer() {
