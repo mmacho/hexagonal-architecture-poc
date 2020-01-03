@@ -52,65 +52,7 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
-			<!-- Mule Dependencies -->
-			<!-- Xml configuration -->
-			<dependency>
-				<groupId>org.mule.modules</groupId>
-				<artifactId>mule-module-spring-config</artifactId>
-				<version>${mule.version}</version>
-				<scope>provided</scope>
-			</dependency>
-			<!-- Mule Transports -->
-			<dependency>
-				<groupId>org.mule.transports</groupId>
-				<artifactId>mule-transport-file</artifactId>
-				<version>${mule.version}</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.mule.transports</groupId>
-				<artifactId>mule-transport-http</artifactId>
-				<version>${mule.version}</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.mule.transports</groupId>
-				<artifactId>mule-transport-jdbc</artifactId>
-				<version>${mule.version}</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.mule.transports</groupId>
-				<artifactId>mule-transport-jms</artifactId>
-				<version>${mule.version}</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.mule.transports</groupId>
-				<artifactId>mule-transport-vm</artifactId>
-				<version>${mule.version}</version>
-				<scope>provided</scope>
-			</dependency>
-			<!-- Mule Modules -->
-			<dependency>
-				<groupId>org.mule.modules</groupId>
-				<artifactId>mule-module-scripting</artifactId>
-				<version>${mule.version}</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.mule.modules</groupId>
-				<artifactId>mule-module-xml</artifactId>
-				<version>${mule.version}</version>
-				<scope>provided</scope>
-			</dependency>
 			<!-- for testing -->
-			<dependency>
-				<groupId>org.mule.tests</groupId>
-				<artifactId>mule-tests-functional</artifactId>
-				<version>${mule.version}</version>
-				<scope>test</scope>
-			</dependency>
 			<dependency>
 				<groupId>org.junit</groupId>
 				<artifactId>junit-bom</artifactId>

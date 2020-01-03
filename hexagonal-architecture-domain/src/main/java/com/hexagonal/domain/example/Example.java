@@ -5,7 +5,7 @@ package com.hexagonal.domain.example;
  * @author Conchi
  *
  */
-public final class Example {
+public class Example {
 
 	private final Integer id;
 

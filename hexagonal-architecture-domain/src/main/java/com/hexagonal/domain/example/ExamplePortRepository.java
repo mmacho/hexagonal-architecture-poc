@@ -4,5 +4,5 @@ import java.util.Optional;
 
 public interface ExamplePortRepository {
 
-	Optional<Example> findById(final Integer identifier);
+	Optional<Example> findById(Integer identifier);
 }

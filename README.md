@@ -3,3 +3,10 @@
 A POC of a Mule ESB CE and Spring-Boot application based on **hexagonal architecture**
 
 ![alt hexagonal architecture / port and adapters](https://i.imgur.com/eseWVlB.png)
+
+
+Notes:
+
+Por la versión de hikari
+
+loader.override=javassist

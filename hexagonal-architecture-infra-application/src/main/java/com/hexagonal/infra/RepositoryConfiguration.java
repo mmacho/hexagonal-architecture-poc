@@ -1,7 +1,5 @@
 package com.hexagonal.infra;
 
-
-
 import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,14 +16,13 @@ public class RepositoryConfiguration {
 
 	@Configuration
 	@EnableTransactionManagement
-	@EnableJpaRepositories(basePackageClasses = { ExampleEntityRepository.class })
+	@EnableJpaRepositories(basePackageClasses = {
+			ExampleEntityRepository.class }, entityManagerFactoryRef = DatabaseConfiguration.ENTITY_MANAGER_FACTORY, transactionManagerRef = DatabaseConfiguration.TRANSACTION_MANAGER)
 	@EntityScan(basePackageClasses = { JpaExampleEntity.class })
 	public static class DataJPAConfiguration {
 
-		
 		@Bean
 		public ExamplePortRepository examplePortRepository(final ExampleEntityRepository exampleEntityRepository) {
-
 			return new ExampleJPARepositoryAdapter(exampleEntityRepository);
 		}
 	}

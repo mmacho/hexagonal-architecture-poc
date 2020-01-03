@@ -12,16 +12,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import com.hexagonal.domain.example.Example;
 import com.hexagonal.domain.example.ExampleService;
 import com.hexagonal.infra.adapter.api.model.XmlExampleEntity;
 
-@Service
 @Singleton
 @WebService(endpointInterface = "com.wandrell.example.mule.wss.endpoint.ExampleEntityEndpoint", serviceName = ExampleEntityEndpointConstants.SERVICE, targetNamespace = ExampleEntityEndpointConstants.ENTITY_NS)
-public final class CodeFirstExampleEntityEndpoint implements ExampleEntityEndpoint {
+public class CodeFirstExampleEntityEndpoint implements ExampleEntityEndpoint {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(CodeFirstExampleEntityEndpoint.class);
 
@@ -34,7 +32,7 @@ public final class CodeFirstExampleEntityEndpoint implements ExampleEntityEndpoi
 	}
 
 	@Override
-	public XmlExampleEntity getEntity(final Integer id) {
+	public final XmlExampleEntity getEntity(final Integer id) {
 		final XmlExampleEntity response; // XML response with the entity data
 		Example example = null;
 
