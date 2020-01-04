@@ -39,8 +39,8 @@ public class CodeFirstExampleEntityEndpoint implements ExampleEntityEndpoint {
 	private final ExampleServicePort jdbc;
 
 	@Autowired
-	public CodeFirstExampleEntityEndpoint(@Qualifier("examplePersistencePort") ExampleServicePort jpa,
-			@Qualifier("examplePersistencePort2") ExampleServicePort jdbc) {
+	public CodeFirstExampleEntityEndpoint(@Qualifier("exampleServiceAdapter") ExampleServicePort jpa,
+			@Qualifier("exampleServiceAdapter2") ExampleServicePort jdbc) {
 		super();
 		this.jpa = jpa;
 		this.jdbc = jdbc;
