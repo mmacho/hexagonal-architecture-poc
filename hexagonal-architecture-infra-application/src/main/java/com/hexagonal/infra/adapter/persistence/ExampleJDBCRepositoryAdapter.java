@@ -7,8 +7,7 @@ import org.apache.commons.lang.NotImplementedException;
 
 import com.hexagonal.domain.data.Example;
 import com.hexagonal.domain.data.port.ExamplePersistencePort;
-import com.hexagonal.persistence.jpa.entity.JpaExampleEntity;
-import com.hexagonal.persistence.jpa.repository.ExampleEntityRepository;
+import com.hexagonal.persistence.jdbc.repository.ExampleModelRepository;
 
 /**
  * Secundary Adapter, contains implementation for secondary ports defined in
@@ -22,13 +21,13 @@ import com.hexagonal.persistence.jpa.repository.ExampleEntityRepository;
  * @author Conchi
  *
  */
-public class ExampleJPARepositoryAdapter implements ExamplePersistencePort {
+public class ExampleJDBCRepositoryAdapter implements ExamplePersistencePort {
 
-	private ExampleEntityRepository exampleEntityRepository;
+	private final ExampleModelRepository exampleModelRepository;
 
-	public ExampleJPARepositoryAdapter(ExampleEntityRepository exampleEntityRepository) {
+	public ExampleJDBCRepositoryAdapter(final ExampleModelRepository exampleModelRepository) {
 		super();
-		this.exampleEntityRepository = exampleEntityRepository;
+		this.exampleModelRepository = exampleModelRepository;
 	}
 
 	@Override
@@ -52,16 +51,21 @@ public class ExampleJPARepositoryAdapter implements ExamplePersistencePort {
 	@Override
 	public List<Example> getAllExamples() {
 		throw new NotImplementedException("NotImplementedException");
-
 	}
 
 	@Override
 	public Optional<Example> getExampleById(Integer id) {
-		return exampleEntityRepository.findById(id).map(this::adapt);
+		return exampleModelRepository.findById(id).map(this::adapt);
 
 	}
 
-	private Example adapt(JpaExampleEntity jpaExampleEntity) {
-		return new Example(jpaExampleEntity.getId(), jpaExampleEntity.getName());
+	/**
+	 * 
+	 * @param exampleModel
+	 * @return
+	 */
+	private Example adapt(com.hexagonal.persistence.jdbc.model.ExampleModel exampleModel) {
+		return new Example(exampleModel.getId(), exampleModel.getName());
 	}
+
 }

@@ -13,8 +13,8 @@ import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 @Configuration
 public class DataSourceInitializerConfiguration {
 
-	private static final String DB_POPULATE_DB_SQL = "classpath:db/populateDB.sql";
-	private static final String DB_INIT_DB_SQL = "classpath:db/initDB.sql";
+	public static final String DB_POPULATE_DB_SQL = "classpath:db/populateDB.sql";
+	public static final String DB_INIT_DB_SQL = "classpath:db/initDB.sql";
 
 	@Value(DB_INIT_DB_SQL)
 	private Resource initLocation;

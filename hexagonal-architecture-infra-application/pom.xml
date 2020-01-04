@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<parent>
 		<groupId>com.hexagonal</groupId>
 		<artifactId>hexagonal-architecture-poc</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
-		<relativePath>../pom.xml</relativePath>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
@@ -20,6 +18,11 @@
 		<build-helper-maven-plugin.version>1.7</build-helper-maven-plugin.version>
 		<jaxb.version>2.2.12</jaxb.version>
 		<cxf.api.version>2.7.18</cxf.api.version>
+
+		<hexagonal-domain.version>1.0.0-SNAPSHOT</hexagonal-domain.version>		
+		<persistence-spring-jdbc.version>1.0.0-SNAPSHOT</persistence-spring-jdbc.version>
+		<persistence-spring-data-jpa.version>1.0.0-SNAPSHOT</persistence-spring-data-jpa.version>
+		<external-system-web-service.version>1.0.0-SNAPSHOT</external-system-web-service.version>
 	</properties>
 
 	<build>
@@ -67,16 +70,25 @@
 	</build>
 
 	<dependencies>
+		<dependency>		
+			<groupId>${project.groupId}</groupId>
+			<artifactId>hexagonal-architecture-core</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>hexagonal-architecture-domain</artifactId>
-			<version>${project.version}</version>
+			<artifactId>persistence-spring-data-jpa</artifactId>
+			<version>${persistence-spring-data-jpa.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.hexagonal</groupId>
-			<artifactId>adapter-persistence-spring-data-jpa</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>persistence-spring-jdbc</artifactId>
+			<version>${persistence-spring-jdbc.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>external-system-web-service</artifactId>
+			<version>${external-system-web-service.version}</version>
+		</dependency>		
 		<!-- Mule Dependencies -->
 		<!-- Xml configuration -->
 		<dependency>
@@ -149,24 +161,23 @@
             <scope>provided</scope>
         </dependency>
 
-		<!-- CXF API -->
+		<!-- External Dependencies -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP</artifactId>			
+		</dependency>	
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-api</artifactId>
 			<version>${cxf.api.version}</version>
 		</dependency>
-				
-		<!-- for project -->
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.zaxxer</groupId>
-			<artifactId>HikariCP</artifactId>
-		</dependency>
-		
-		<!-- Spring Testing -->
+						
+		<!-- Spring Test dependencies -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -177,5 +188,13 @@
 			<artifactId>mockito-core</artifactId>
 			<scope>test</scope>
 		</dependency>	
-	</dependencies>	
+		<!-- Domain -->
+		<dependency>
+            <groupId>com.hexagonal</groupId>
+            <artifactId>hexagonal-domain</artifactId>
+            <version>${hexagonal-domain.version}</version>
+            <scope>test</scope>
+            <type>zip</type>
+        </dependency>
+    </dependencies>	
 </project>

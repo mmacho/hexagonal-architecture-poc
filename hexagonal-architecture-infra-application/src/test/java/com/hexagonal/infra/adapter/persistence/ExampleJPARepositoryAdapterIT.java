@@ -1,6 +1,6 @@
-package infra.adapter.persistence.test;
+package com.hexagonal.infra.adapter.persistence;
 
-import static infra.adapter.persistence.test.ExampleJPARepositoryAdapterIT.ExampleJPARepositoryAdapterITApi.CLASSPATH_PERSISTENCE_PROPERTIES;
+import static com.hexagonal.infra.adapter.persistence.ExampleJPARepositoryAdapterIT.ExampleJPARepositoryAdapterITApi.CLASSPATH_PERSISTENCE_PROPERTIES;
 import static java.util.Optional.empty;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
@@ -16,39 +16,41 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.hexagonal.domain.example.Example;
-import com.hexagonal.domain.example.ExamplePortRepository;
+import com.hexagonal.domain.data.Example;
+import com.hexagonal.domain.data.port.ExamplePersistencePort;
 import com.hexagonal.infra.DataSourceInitializerConfiguration;
 import com.hexagonal.infra.DatabaseConfiguration;
 import com.hexagonal.infra.DomainConfiguration;
-import com.hexagonal.infra.RepositoryConfiguration;
+import com.hexagonal.infra.RepositoryConfiguration.DataJPAConfiguration;
 
 import config.PropertiesConfig;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { PropertiesConfig.class, DatabaseConfiguration.class,
-		DataSourceInitializerConfiguration.class, DomainConfiguration.class, RepositoryConfiguration.class })
+		DataSourceInitializerConfiguration.class, DomainConfiguration.class, DataJPAConfiguration.class })
 @TestPropertySource(CLASSPATH_PERSISTENCE_PROPERTIES)
 public class ExampleJPARepositoryAdapterIT extends AbstractTransactionalJUnit4SpringContextTests {
 
-	private static final int EXAMPLE_FOUND_ID = 1;
-	private static final int EXAMPLE_NOT_FOUND_ID = 10;
+	private static final Integer EXAMPLE_ID = 1;
+	private static final String EXAMPLE_NAME = "entity_1";
+
+	private static final Integer EXAMPLE_NOT_FOUND_ID = 10;
 
 	@Autowired
-	private ExamplePortRepository underTest;
+	private ExamplePersistencePort underTest;
 
 	@Test
 	public void findsExample() {
-		Example expectedExample = new Example(EXAMPLE_FOUND_ID);
+		final Example expectedExample = new Example(EXAMPLE_ID, EXAMPLE_NAME);
 
-		Optional<Example> example = underTest.findById(EXAMPLE_FOUND_ID);
+		Optional<Example> example = underTest.getExampleById(EXAMPLE_ID);
 
 		assertEquals(Optional.of(expectedExample), example);
 	}
 
 	@Test
 	public void notFindsExample() {
-		Optional<Example> shirt = underTest.findById(EXAMPLE_NOT_FOUND_ID);
+		Optional<Example> shirt = underTest.getExampleById(EXAMPLE_NOT_FOUND_ID);
 
 		assertThat(shirt, is(empty()));
 	}

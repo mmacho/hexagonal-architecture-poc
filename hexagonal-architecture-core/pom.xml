@@ -10,10 +10,10 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>hexagonal-architecture-domain</artifactId>
+	<artifactId>hexagonal-architecture-core</artifactId>
 	<packaging>jar</packaging>
-	<name>Mule hexagonal-architecture-domain</name>
-	<description>Mule hexagonal-architecture-domain</description>
+	<name>Mule hexagonal-architecture-core</name>
+	<description>Mule hexagonal-architecture-core</description>
 
 	<properties>
 		<maven-source-plugin.version>3.0.1</maven-source-plugin.version>
@@ -45,11 +45,19 @@
 		</plugins>
 	</build>
 
-	<dependencies>		
+	<dependencies>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>hexagonal-architecture-domain</artifactId>
+		</dependency>	
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-        </dependency>
+        </dependency>		
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+        </dependency>			
 		<!-- Junit4 and Junit5 -->
 		<dependency>
 			<groupId>org.junit.vintage</groupId>

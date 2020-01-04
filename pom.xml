@@ -35,15 +35,31 @@
 		<spring-boot.version>1.2.4.RELEASE</spring-boot.version>
 		<junit-jupiter.version>5.5.2</junit-jupiter.version>
 		<mockito.version>2.28.2</mockito.version>
+
+		<lombok.version>1.18.10</lombok.version>		
 	</properties>
 
 	<modules>
 		<module>hexagonal-architecture-domain</module>
+ 		<module>hexagonal-architecture-core</module>		
 		<module>hexagonal-architecture-infra-application</module>
 	</modules>
 
-	<dependencyManagement>
+	<dependencyManagement> 		
 		<dependencies>
+	 		<!-- Inner dependencies -->		
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>hexagonal-architecture-domain</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>hexagonal-architecture-core</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			
+			<!-- External Dependencies -->							
 			<!-- Spring Boot Dependencies -->
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
@@ -52,7 +68,14 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
-			<!-- for testing -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <optional>true</optional>
+            </dependency>	
+            			
+			<!-- Test dependencies -->
 			<dependency>
 				<groupId>org.junit</groupId>
 				<artifactId>junit-bom</artifactId>
@@ -66,7 +89,7 @@
 				<version>${mockito.version}</version>
 				<scope>test</scope>
 			</dependency>
-		</dependencies>
+        </dependencies>
 	</dependencyManagement>
 
 	<build>

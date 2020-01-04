@@ -3,57 +3,63 @@ package com.hexagonal.infra.adapter.api;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import java.util.Optional;
-
 import javax.inject.Singleton;
 import javax.jws.WebService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
-import com.hexagonal.domain.example.Example;
-import com.hexagonal.domain.example.ExampleService;
+import com.hexagonal.core.port.ExampleServicePort;
 import com.hexagonal.infra.adapter.api.model.XmlExampleEntity;
 
+/**
+ * Primary Adapter, module containing primary adapters (which implement primary
+ * ports) – these module translates calls from other systems (other applications
+ * or just GUI) to call logic from our domain
+ * 
+ * This is module, which should contain technical information about calling our
+ * domain. In our case we have endpoint providing soap resource returning our
+ * examples
+ * 
+ * In this place we could map our domain model to specific response.
+ * 
+ * @author Conchi
+ *
+ */
 @Singleton
-@WebService(endpointInterface = "com.wandrell.example.mule.wss.endpoint.ExampleEntityEndpoint", serviceName = ExampleEntityEndpointConstants.SERVICE, targetNamespace = ExampleEntityEndpointConstants.ENTITY_NS)
+@WebService(endpointInterface = "com.hexagonal.infra.adapter.api.ExampleEntityEndpoint", serviceName = ExampleEntityEndpointConstants.SERVICE, targetNamespace = ExampleEntityEndpointConstants.ENTITY_NS)
 public class CodeFirstExampleEntityEndpoint implements ExampleEntityEndpoint {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(CodeFirstExampleEntityEndpoint.class);
 
-	private final ExampleService exampleService;
+	private final ExampleServicePort jpa;
+
+	private final ExampleServicePort jdbc;
 
 	@Autowired
-	public CodeFirstExampleEntityEndpoint(final ExampleService exampleService) {
+	public CodeFirstExampleEntityEndpoint(@Qualifier("examplePersistencePort") ExampleServicePort jpa,
+			@Qualifier("examplePersistencePort2") ExampleServicePort jdbc) {
 		super();
-		this.exampleService = exampleService;
+		this.jpa = jpa;
+		this.jdbc = jdbc;
 	}
 
 	@Override
-	public final XmlExampleEntity getEntity(final Integer id) {
-		final XmlExampleEntity response; // XML response with the entity data
-		Example example = null;
-
+	public final XmlExampleEntity getEntity(Integer id) {
 		checkNotNull(id, "Received a null pointer as id");
-
 		LOGGER.debug(String.format("Received request for id %d", id));
-
-		// Acquires the domain
-		Optional<Example> op = getExampleService().findById(id);
-		if (op.isPresent()) {
-			example = op.get();
-			LOGGER.debug(String.format("Found domain with id %1$d", example.getId()));
-		}
-
-		response = new XmlExampleEntity();
-		BeanUtils.copyProperties(example, response);
-		return response;
+		XmlExampleEntity xmlExampleEntity = Converters.convert(jpa.getExampleById(id));
+		return xmlExampleEntity;
 	}
 
-	public ExampleService getExampleService() {
-		return exampleService;
+	@Override
+	public final XmlExampleEntity getJdbcEntity(Integer id) {
+		checkNotNull(id, "Received a null pointer as id");
+		LOGGER.debug(String.format("Received request for id %d", id));
+		XmlExampleEntity xmlExampleEntity = Converters.convert(jdbc.getExampleById(id));
+		return xmlExampleEntity;
 	}
 
 }

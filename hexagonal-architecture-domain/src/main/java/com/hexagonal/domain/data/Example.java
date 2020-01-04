@@ -1,7 +1,8 @@
-package com.hexagonal.domain.example;
+package com.hexagonal.domain.data;
 
 /**
- * immutable 
+ * Domain data structures and imutable
+ * 
  * @author Conchi
  *
  */
@@ -9,13 +10,20 @@ public class Example {
 
 	private final Integer id;
 
-	public Example(Integer id) {
+	private final String name;
+
+	public Example(Integer id, String name) {
 		super();
 		this.id = id;
+		this.name = name;
 	}
 
 	public Integer getId() {
 		return id;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	@Override
@@ -23,6 +31,7 @@ public class Example {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
 
@@ -40,12 +49,17 @@ public class Example {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Example [id=" + id + "]";
+		return "Example [id=" + id + ", name=" + name + "]";
 	}
-	
+
 }

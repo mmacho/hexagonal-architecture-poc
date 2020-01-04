@@ -21,13 +21,9 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 		</spring:bean>       
     </spring:beans>
   
-	<http:listener-config doc:name="Main HTTP listener for the application"
-		name="Listener-Application" basePath="${app.url.path}" host="${app.url.host}"
-		port="${app.url.port}" />
-
 	<cxf:configuration name="CXF_Configuration"
 		enableMuleSoapHeaders="${cxf.enableMuleSoapHeaders}"
 		initializeStaticBusInstance="${cxf.initializeStaticBusInstance}"
 		doc:name="CXF Configuration" configurationLocation="${cxf.configFile}" />
-  
+
 </mule>

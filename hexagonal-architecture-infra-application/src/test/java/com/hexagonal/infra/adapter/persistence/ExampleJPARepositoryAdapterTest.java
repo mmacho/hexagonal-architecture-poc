@@ -1,4 +1,4 @@
-package infra.adapter.persistence.test;
+package com.hexagonal.infra.adapter.persistence;
 
 import static java.util.Optional.empty;
 import static org.hamcrest.CoreMatchers.is;
@@ -14,7 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.hexagonal.domain.example.Example;
+import com.hexagonal.domain.data.Example;
 import com.hexagonal.infra.adapter.persistence.ExampleJPARepositoryAdapter;
 import com.hexagonal.persistence.jpa.entity.JpaExampleEntity;
 import com.hexagonal.persistence.jpa.repository.ExampleEntityRepository;
@@ -22,7 +22,8 @@ import com.hexagonal.persistence.jpa.repository.ExampleEntityRepository;
 @RunWith(MockitoJUnitRunner.class)
 public class ExampleJPARepositoryAdapterTest {
 
-	private static final int ANY_EXAMPLE_ID = 1;
+	private static final Integer EXAMPLE_ID = 1;
+	private static final String EXAMPLE_NAME = "name";
 
 	@Mock
 	private ExampleEntityRepository exampleEntityRepository;
@@ -33,23 +34,22 @@ public class ExampleJPARepositoryAdapterTest {
 	@Test
 	public void findsExample() {
 
-		Example expectedExample = new Example(ANY_EXAMPLE_ID);
+		final Example expectedExample = new Example(EXAMPLE_ID, EXAMPLE_NAME);
 
-		JpaExampleEntity jpaExampleEntity = new JpaExampleEntity();
-		jpaExampleEntity.setId(ANY_EXAMPLE_ID);
+		JpaExampleEntity jpaExampleEntity = new JpaExampleEntity(EXAMPLE_ID, EXAMPLE_NAME);
 
-		when(exampleEntityRepository.findById(ANY_EXAMPLE_ID)).thenReturn(Optional.of(jpaExampleEntity));
+		when(exampleEntityRepository.findById(EXAMPLE_ID)).thenReturn(Optional.of(jpaExampleEntity));
 
-		Optional<Example> example = underTest.findById(ANY_EXAMPLE_ID);
+		Optional<Example> example = underTest.getExampleById(EXAMPLE_ID);
 
 		assertEquals(Optional.of(expectedExample), example);
 	}
 
 	@Test
 	public void notFindsExample() {
-		when(exampleEntityRepository.findById(ANY_EXAMPLE_ID)).thenReturn(empty());
+		when(exampleEntityRepository.findById(EXAMPLE_ID)).thenReturn(empty());
 
-		Optional<Example> example = underTest.findById(ANY_EXAMPLE_ID);
+		Optional<Example> example = underTest.getExampleById(EXAMPLE_ID);
 
 		assertThat(example, is(empty()));
 	}
