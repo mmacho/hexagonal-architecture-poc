@@ -9,7 +9,7 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
-    <description>Mule Hexagonal Microservice Architecture Configuration</description>
+    <description>Mule Hexagonal Microservice Architecture Configuration</description>    
     <spring:beans>    
         <spring:bean id="hexagonalApplication" name="hexagonalApplication" class="com.hexagonal.app.HexagonalApplication"/>
         <spring:bean id="codeFirstExampleEntityEndpoint" name="codeFirstExampleEntityEndpoint" class="com.hexagonal.infra.adapter.api.CodeFirstExampleEntityEndpoint"/>
@@ -25,5 +25,4 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 		enableMuleSoapHeaders="${cxf.enableMuleSoapHeaders}"
 		initializeStaticBusInstance="${cxf.initializeStaticBusInstance}"
 		doc:name="CXF Configuration" configurationLocation="${cxf.configFile}" />
-
 </mule>

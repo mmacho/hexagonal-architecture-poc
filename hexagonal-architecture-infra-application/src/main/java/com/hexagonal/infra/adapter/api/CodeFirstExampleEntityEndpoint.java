@@ -6,13 +6,14 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import javax.inject.Singleton;
 import javax.jws.WebService;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import com.hexagonal.core.port.ExampleServicePort;
 import com.hexagonal.infra.adapter.api.model.XmlExampleEntity;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Primary Adapter, module containing primary adapters (which implement primary
@@ -28,19 +29,19 @@ import com.hexagonal.infra.adapter.api.model.XmlExampleEntity;
  * @author Conchi
  *
  */
+@Slf4j
+@Service
 @Singleton
 @WebService(endpointInterface = "com.hexagonal.infra.adapter.api.ExampleEntityEndpoint", serviceName = ExampleEntityEndpointConstants.SERVICE, targetNamespace = ExampleEntityEndpointConstants.ENTITY_NS)
 public class CodeFirstExampleEntityEndpoint implements ExampleEntityEndpoint {
-
-	private static final Logger LOGGER = LoggerFactory.getLogger(CodeFirstExampleEntityEndpoint.class);
 
 	private final ExampleServicePort jpa;
 
 	private final ExampleServicePort jdbc;
 
 	@Autowired
-	public CodeFirstExampleEntityEndpoint(@Qualifier("exampleServiceAdapter") ExampleServicePort jpa,
-			@Qualifier("exampleServiceAdapter2") ExampleServicePort jdbc) {
+	public CodeFirstExampleEntityEndpoint(@Qualifier("exampleJPAServiceAdapter") ExampleServicePort jpa,
+			@Qualifier("exampleJDBCServiceAdapter") ExampleServicePort jdbc) {
 		super();
 		this.jpa = jpa;
 		this.jdbc = jdbc;
@@ -49,7 +50,7 @@ public class CodeFirstExampleEntityEndpoint implements ExampleEntityEndpoint {
 	@Override
 	public final XmlExampleEntity getEntity(Integer id) {
 		checkNotNull(id, "Received a null pointer as id");
-		LOGGER.debug(String.format("Received request for id %d", id));
+		log.debug(String.format("Received jpa request for id %d", id));
 		XmlExampleEntity xmlExampleEntity = Converters.convert(jpa.getExampleById(id));
 		return xmlExampleEntity;
 	}
@@ -57,9 +58,13 @@ public class CodeFirstExampleEntityEndpoint implements ExampleEntityEndpoint {
 	@Override
 	public final XmlExampleEntity getJdbcEntity(Integer id) {
 		checkNotNull(id, "Received a null pointer as id");
-		LOGGER.debug(String.format("Received request for id %d", id));
-		XmlExampleEntity xmlExampleEntity = Converters.convert(jdbc.getExampleById(id));
-		return xmlExampleEntity;
+		log.debug(String.format("Received jdbc request for id %d", id));
+		return jdbc.getExampleById(id).map(Converters::convert).orElseThrow(ExampleNotFound::new);
 	}
 
+	static class ExampleNotFound extends RuntimeException {
+
+		private static final long serialVersionUID = -8207618205988260273L;
+
+	}
 }

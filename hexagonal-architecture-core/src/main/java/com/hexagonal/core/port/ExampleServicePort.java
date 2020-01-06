@@ -2,7 +2,7 @@ package com.hexagonal.core.port;
 
 import java.util.Optional;
 
-import com.hexagonal.domain.data.Example;
+import com.hexagonal.domain.Example;
 
 /**
  * Primary Port, used for calling business logic (like entry point for this

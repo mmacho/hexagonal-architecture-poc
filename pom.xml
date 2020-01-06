@@ -32,17 +32,25 @@
 		<mule.tools.version>1.7</mule.tools.version>
 		<maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>
 
-		<spring-boot.version>1.2.4.RELEASE</spring-boot.version>
 		<junit-jupiter.version>5.5.2</junit-jupiter.version>
 		<mockito.version>2.28.2</mockito.version>
-
+        <assertj-core.version>3.13.2</assertj-core.version>
+        
 		<lombok.version>1.18.10</lombok.version>		
 	</properties>
 
+	 <parent>
+	    <groupId>org.springframework.boot</groupId>
+	    <artifactId>spring-boot-starter-parent</artifactId>
+	    <version>1.2.4.RELEASE</version>
+	    <relativePath/>
+	  </parent>
+	  
 	<modules>
 		<module>hexagonal-architecture-domain</module>
  		<module>hexagonal-architecture-core</module>		
 		<module>hexagonal-architecture-infra-application</module>
+		<module>hexagonal-architecture-test</module>		
 	</modules>
 
 	<dependencyManagement> 		
@@ -59,15 +67,7 @@
 				<version>${project.version}</version>
 			</dependency>
 			
-			<!-- External Dependencies -->							
-			<!-- Spring Boot Dependencies -->
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-dependencies</artifactId>
-				<version>${spring-boot.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
+			<!-- External Dependencies -->										
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
@@ -89,6 +89,12 @@
 				<version>${mockito.version}</version>
 				<scope>test</scope>
 			</dependency>
+			<dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>${assertj-core.version}</version>
+                <scope>test</scope>
+            </dependency>		
         </dependencies>
 	</dependencyManagement>
 

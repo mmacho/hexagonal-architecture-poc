@@ -4,18 +4,18 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.hexagonal.core.adapter.ExampleServiceAdapter;
-import com.hexagonal.domain.data.port.ExamplePersistencePort;
+import com.hexagonal.domain.port.ExamplePersistencePort;
 
 @Configuration
 public class DomainConfiguration {
 
 	@Bean
-	public ExampleServiceAdapter exampleServiceAdapter(final ExamplePersistencePort examplePersistencePort) {
-		return new ExampleServiceAdapter(examplePersistencePort);
+	public ExampleServiceAdapter exampleJPAServiceAdapter(ExamplePersistencePort exampleJPAPersistencePort) {
+		return new ExampleServiceAdapter(exampleJPAPersistencePort);
 	}
 
 	@Bean
-	public ExampleServiceAdapter exampleServiceAdapter2(final ExamplePersistencePort examplePersistencePort2) {
-		return new ExampleServiceAdapter(examplePersistencePort2);
+	public ExampleServiceAdapter exampleJDBCServiceAdapter(ExamplePersistencePort exampleJDBCPersistencePort) {
+		return new ExampleServiceAdapter(exampleJDBCPersistencePort);
 	}
 }
